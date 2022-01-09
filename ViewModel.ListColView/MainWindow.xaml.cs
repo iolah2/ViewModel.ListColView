@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel.ListColView.ViewModels;
 
 namespace ViewModel.ListColView
 {
@@ -20,9 +21,43 @@ namespace ViewModel.ListColView
     /// </summary>
     public partial class MainWindow : Window
     {
+        private TestViewModel vm;
+
         public MainWindow()
         {
             InitializeComponent();
+            //dg.CanUserAddRows = true;
+            vm = new ViewModels.TestViewModel();
+            DataContext = vm;
+            dg.ItemsSource = vm.TestListCollectionView;
+            //dg.CanUserAddRows = true;
         }
+
+        private void dg_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            /* if((vm.PeopleColl.Last().FirstName ?? "") != "")
+                 vm.PeopleColl.Add(new Person());//dg.ItemsSource*/
+            //for (int i = 0; i < 3; i++)
+            {
+                if (vm.TestListCollectionView.IsAddingNew)
+                    vm.TestListCollectionView.CommitNew();
+                else if (vm.TestListCollectionView.IsEditingItem)
+                    vm.TestListCollectionView.CommitEdit();
+            }
+            vm.TestListCollectionView.Refresh();
+            
+            ;
+            ;
+        }
+
+        //private void dg_PreviewKeyDown(object sender, KeyEventArgs e)
+        //{
+        //    if(e.Key == Key.Enter)
+        //    {
+        //        if(dg.)
+
+        //        //vm.AddNewRowIfNeed();
+        //    }
+        //}
     }
 }

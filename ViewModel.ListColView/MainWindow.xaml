@@ -3,10 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ViewModel.ListColView"
+        xmlns:vm ="clr-namespace:ViewModel.ListColView.ViewModels"
+        xmlns:local="clr-namespace:ViewModel.ListColView" d:DataContext="{d:DesignInstance Type=vm:TestViewModel}"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800"
+        >
+    <Window.DataContext>
+        <vm:TestViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <DataGrid x:Name="dg"
+                  RowEditEnding="dg_RowEditEnding"
+                 >
+            <!--<DataGrid.ItemsSource>
+             RowEditEnding="dg_RowEditEnding"
+                <Binding Mode="OneWay" Source="{Binding TestListCollectionView}"/>
+                --><!--{StaticResource TestListCollectionView}"/>--><!--
+            </DataGrid.ItemsSource>-->
+            <!--ItemsSource="{Binding Source={StaticResource TestListCollectionView}}"-->
+            <!--https://stackoverflow.com/questions/9032700/listcollectionview-datagrid-add-row-->
+            <!--https://github.com/dotnet/wpf/blob/main/src/Microsoft.DotNet.Wpf/src/PresentationFramework/System/Windows/Data/ListCollectionView.cs-->
+            <!--<DataGridTextColumn Binding="{Binding FirstName}"/>
+            <DataGridTextColumn Binding="{Binding LastName}"/>
+            <DataGridTextColumn Binding="{Binding Country}"/>-->
+        </DataGrid>
     </Grid>
 </Window>
